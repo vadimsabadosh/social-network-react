@@ -1,4 +1,5 @@
 import React from 'react'
+import MyPosts from './MyPosts/MyPosts';
 import s from './Profile.module.css';
 
 const Profile = () => {
@@ -10,17 +11,7 @@ const Profile = () => {
     <div className={s.profileContent}>
       ava+ desc
     </div>
-    <div className={s.postsWrapper}>
-      <div>My Posts</div>
-      <div>
-        New post
-      </div>
-      <div>
-        <div>
-          post
-        </div>
-      </div>
-    </div>
+    <MyPosts />
   </main>
   )
 }
