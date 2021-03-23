@@ -8,14 +8,12 @@ const MyPosts = () => {
     <div className={s.postsWrapper}>
       <div>My Posts</div>
       <div>
-        New post
+        <textarea></textarea>
+        <button>Add post</button>
       </div>
       <div>
-        <Post />
-        <Post />
-        <Post />
-        <Post />
-        <Post />
+        <Post message='sdfsdfsdf' likesCount='0'/>
+        <Post message='dgvhnjfdn' likesCount='19'/>
       </div>
     </div>
   )

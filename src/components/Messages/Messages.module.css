@@ -1,0 +1,53 @@
+
+.title{
+  font-size: 24px;
+  padding-left: 20px;
+}
+
+.messagesWrapper{
+  display: flex;
+  border-top: #40404096;
+  border-top-width: 1px;
+  border-top-style: solid;
+  height: 100%;
+}
+.messagesUsers{
+  width: 30%;
+  border-right: #40404096;
+  border-right-width: 1px;
+  border-right-style: solid;
+}
+
+.messagesUsers_user{
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 45px;
+    display: block;
+    color: #212121;
+    text-decoration: none;
+    cursor: pointer;
+    position: relative;
+    font-weight: 700;
+}
+.messagesUsers_user::before{
+  position: absolute;
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: green;
+  top: calc(50% - 3px);
+  left: 30px;
+}
+.messagesUsers_userActive{
+  box-shadow: inset 0px 0px 20px 10px #a8b7b5;
+}
+
+.messagesWindow{
+  width: 70%;
+  padding: 10px;
+}
+
+.message{
+
+}

@@ -13,3 +13,9 @@ body{
   width: 960px;
   margin: 0 auto;
 }
+
+.app-wrapper-content{
+  grid-area: main;
+  background-color:#e3e3e3;
+  border-radius: 15px;
+}

@@ -1,15 +1,15 @@
 import React from 'react'
 import s from './Post.module.css';
 
-const Post = () => {
+const Post = ({message, likesCount}) => {
   return(
         <div>
           <img src='' />
-          <div className='post'>
-            Post
+          <div className={s.post}>
+            {message}
           </div>
-          <div className='like'>
-            like
+          <div className={s.like}>
+            like {likesCount} 
           </div>
         </div>
   )
