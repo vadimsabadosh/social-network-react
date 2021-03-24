@@ -4,3 +4,25 @@
   background-color:#e3e3e3;
   border-radius: 15px;
 }
+.textarea{
+  width: 100%;
+  border-radius: 4px;
+  height: 60px;
+  display: block;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  padding: 5px;
+  border: solid 1px #e7e8ec;
+}
+
+.button{
+  padding: 7px 16px 8px;
+  margin: 0;
+  cursor: pointer;
+  text-align: center;
+  background: 0 0;
+  background-color: #34495e;
+  border: 0;
+  border-radius: 4px;
+  color: #fff;
+}

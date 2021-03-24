@@ -1,40 +1,22 @@
 import React from 'react'
 import s from './Messages.module.css';
+import MessageUser from './MessageUser/MessageUser'
+import Message from './Message/Message'
 
+const Messages = ({ state }) => {
 
-const Messages = () => {
+  let dialogsElems = state.dialogs.map(d => <MessageUser name={d.name} key={d.id} id={d.id}/> );
+  let messagesElems = state.messages.map(m =>  <Message message={m.message} key={m.id} id={m.id}/>)
+
   return (
     <div>
       <h1 className={s.title}>Messages</h1>
       <div className={s.messagesWrapper}>
         <div className={s.messagesUsers}>
-          <div className={s.messagesUsers_user + ' ' + s.messagesUsers_userActive}>
-            Anton
-          </div>
-          <div className={s.messagesUsers_user}>
-            Andre
-          </div>
-          <div className={s.messagesUsers_user}>
-            Orest
-          </div>
-          <div className={s.messagesUsers_user}>
-            Johnny
-          </div>
-          <div className={s.messagesUsers_user}>
-            Andre
-          </div>
-          <div className={s.messagesUsers_user}>
-            Orest
-          </div>
-          <div className={s.messagesUsers_user}>
-            Johnny
-          </div>
+          { dialogsElems }
         </div>
         <div className={s.messagesWindow}>
-          <div className={s.message}>Hi</div>
-          <div className={s.message}>Hi, how are you?</div>
-          <div className={s.message}>pzdc</div>
-          <div className={s.message}>another pzdc</div>
+          { messagesElems }
         </div>
 
       </div>

@@ -1,6 +1,11 @@
-
+*{
+  box-sizing: border-box;
+}
 .nav{
   grid-area: nav;
+
+}
+.nav_wrap{
   background-color:#40404096;
   color: #e3e3e3;
   padding: 15px 0px;
@@ -20,4 +25,40 @@
 }
 .link.active{
   background-color:#404040;
+}
+.friends_wrap{
+  background-color:#40404096;
+  color: #e3e3e3;
+  padding: 15px 0px;
+  border-radius: 15px;
+  margin-top: 25px;
+  width: 100%;
+}
+.friends_wrap h3{
+  text-align: center;
+
+}
+.friends{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  width: 100%;
+}
+.friend{
+  width: 33.3%;
+  padding: 5px;
+  text-align: center;
+}
+.friend img{
+  max-width: 100%;
+  width: 55px;
+  height: 55px;
+  border-radius:50%;
+  object-fit: cover;
+}
+.friend h4{
+  font-size: 16px;
+  font-weight: 500;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }

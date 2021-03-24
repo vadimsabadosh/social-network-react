@@ -6,15 +6,28 @@ import Profile from './components/Profile/Profile';
 import Messages from './components/Messages/Messages';
 import { BrowserRouter, Route } from 'react-router-dom';
 
-const App = () => {
+const App = props => {
   return (
     <BrowserRouter>
       <div className='app-wrapper'>
         <Header />
-        <NavBar />
+        <NavBar state={props.state.sidebar}/>
         <div className='app-wrapper-content'>
-          <Route exact path='/messages' component={Messages}/>
-          <Route exact path='/profile' component={Profile}/>
+          <Route 
+            path='/messages' 
+            render={() => <Messages state={props.state.messagesPage} />}
+          />
+
+          <Route 
+            exact 
+            path='/profile' 
+            render={() => <Profile 
+                state={props.state.profilePage} 
+                addPost={props.addPost}
+                updatePostText={props.updatePostText}
+                />
+            }
+          />
         </div>
       </div>
     </BrowserRouter>
