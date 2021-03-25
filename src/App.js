@@ -15,7 +15,10 @@ const App = props => {
         <div className='app-wrapper-content'>
           <Route 
             path='/messages' 
-            render={() => <Messages state={props.state.messagesPage} />}
+            render={() => <Messages 
+                state={props.state.messagesPage} 
+                dispatch={props.dispatch}
+            />}
           />
 
           <Route 

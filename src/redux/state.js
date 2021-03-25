@@ -1,3 +1,7 @@
+const ADD_POST = 'ADD-POST';
+const UPDATE_POST_TEXT = 'UPDATE-POST-TEXT';
+const UPDATE_NEW_MSG_TEXT = 'UPDATE_NEW_MSG_TEXT';
+const SEND_MESSAGE = 'SEND_MESSAGE';
 
 let store = {
   _state :{
@@ -28,7 +32,8 @@ let store = {
         {id:4, message: 'pzdc'},
         {id:5, message: 'are you?'},
         {id:6, message: 'another pzdc'},
-      ]
+      ],
+      newTextMsg: '',
     },
     sidebar: {
       friendsList:[
@@ -62,7 +67,7 @@ let store = {
     this._callSubscriber = observer;
   },
   dispatch(action){
-    if(action.type === 'ADD-POST'){
+    if(action.type === ADD_POST){
       let newPost = {
         id: 5,
         message: this._state.profilePage.newPostText,
@@ -71,8 +76,19 @@ let store = {
       this._state.profilePage.posts.push(newPost);
       this._state.profilePage.newPostText = '';
       this._callSubscriber(this._state);
-    }else if(action.type === 'UPDATE-POST-TEXT'){
+    }else if(action.type === UPDATE_POST_TEXT){
       this._state.profilePage.newPostText = action.newText;
+      this._callSubscriber(this._state);
+    }else if(action.type ===  UPDATE_NEW_MSG_TEXT){
+      this._state.messagesPage.newTextMsg = action.newText;
+      this._callSubscriber(this._state);
+    }else if(action.type ===  SEND_MESSAGE){
+      let newMsg = {
+        id: 10,
+        message: this._state.messagesPage.newTextMsg,
+      }
+      this._state.messagesPage.messages.push(newMsg);
+      this._state.messagesPage.newTextMsg = '';
       this._callSubscriber(this._state);
     }
   }
@@ -80,12 +96,23 @@ let store = {
 
 export const addPostActionCreator = () => {
   return {
-    type: 'ADD-POST'
+    type: ADD_POST
+  }
+}
+export const updateTextMsgActionCreator = (text) => {
+  return {
+    type: UPDATE_NEW_MSG_TEXT,
+    newText: text
+  }
+}
+export const sendMsgActionCreator = () => {
+  return {
+    type: SEND_MESSAGE,
   }
 }
 export const updatePostTextActionCreator = (text) => {
   return {
-    type: 'UPDATE-POST-TEXT',
+    type: UPDATE_POST_TEXT,
     newText: text
   }
 }
