@@ -1,7 +1,6 @@
-const ADD_POST = 'ADD-POST';
-const UPDATE_POST_TEXT = 'UPDATE-POST-TEXT';
-const UPDATE_NEW_MSG_TEXT = 'UPDATE_NEW_MSG_TEXT';
-const SEND_MESSAGE = 'SEND_MESSAGE';
+import reducerMessages from "./reducerMessages";
+import reducerProfile from "./reducerProfile";
+import reducerSidebar from "./reducerSidebar";
 
 let store = {
   _state :{
@@ -67,54 +66,15 @@ let store = {
     this._callSubscriber = observer;
   },
   dispatch(action){
-    if(action.type === ADD_POST){
-      let newPost = {
-        id: 5,
-        message: this._state.profilePage.newPostText,
-        likesCount:0
-      }
-      this._state.profilePage.posts.push(newPost);
-      this._state.profilePage.newPostText = '';
-      this._callSubscriber(this._state);
-    }else if(action.type === UPDATE_POST_TEXT){
-      this._state.profilePage.newPostText = action.newText;
-      this._callSubscriber(this._state);
-    }else if(action.type ===  UPDATE_NEW_MSG_TEXT){
-      this._state.messagesPage.newTextMsg = action.newText;
-      this._callSubscriber(this._state);
-    }else if(action.type ===  SEND_MESSAGE){
-      let newMsg = {
-        id: 10,
-        message: this._state.messagesPage.newTextMsg,
-      }
-      this._state.messagesPage.messages.push(newMsg);
-      this._state.messagesPage.newTextMsg = '';
-      this._callSubscriber(this._state);
-    }
+
+    this._state.profilePage = reducerProfile(this._state.profilePage, action);
+    this._state.messagesPage = reducerMessages(this._state.messagesPage, action);
+    this._state.sidebar = reducerSidebar(this._state.sidebar, action);
+    this._callSubscriber(this._state);
   }
 }
 
-export const addPostActionCreator = () => {
-  return {
-    type: ADD_POST
-  }
-}
-export const updateTextMsgActionCreator = (text) => {
-  return {
-    type: UPDATE_NEW_MSG_TEXT,
-    newText: text
-  }
-}
-export const sendMsgActionCreator = () => {
-  return {
-    type: SEND_MESSAGE,
-  }
-}
-export const updatePostTextActionCreator = (text) => {
-  return {
-    type: UPDATE_POST_TEXT,
-    newText: text
-  }
-}
+
+
 
 export default store;
