@@ -6,22 +6,22 @@ import Profile from './components/Profile/Profile';
 import { BrowserRouter, Route } from 'react-router-dom';
 import MessagesContainer from './components/Messages/MessagesContainer';
 
-const App = props => {
+const App = () => {
   return (
     <BrowserRouter>
       <div className='app-wrapper'>
         <Header />
-        <NavBar state={props.store.getState().sidebar}/>
+        <NavBar />
         <div className='app-wrapper-content'>
           <Route 
             path='/messages' 
-            render={() => <MessagesContainer store={props.store} />}
+            render={() => <MessagesContainer />}
           />
 
           <Route 
             exact 
             path='/profile' 
-            render={() => <Profile store={props.store} />
+            render={() => <Profile />
             }
           />
         </div>

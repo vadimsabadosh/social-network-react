@@ -2,17 +2,20 @@ import store from './redux/redux-store';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
+import { Provider } from 'react-redux';
 
-const rerenderApp = (state) => {
+const rerenderApp = () => {
   ReactDOM.render(
     <React.StrictMode>
-      <App store={store} dispatch={store.dispatch.bind(store)}/>
+      <Provider store={store}>
+        <App />
+      </Provider>
     </React.StrictMode>,
     document.getElementById('root')
   );
 }
-rerenderApp(store.getState());
+rerenderApp();
 store.subscribe(() => {
-  rerenderApp(store.getState())
+  rerenderApp()
 });
 
