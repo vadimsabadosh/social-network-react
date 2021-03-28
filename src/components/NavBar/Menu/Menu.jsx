@@ -13,7 +13,7 @@ const Menu = () => {
           <NavLink to='/messages' className={s.link} activeClassName={s.active}>Messages</NavLink>
         </div>
         <div className={s.item}>
-          <NavLink to='/news' className={s.link} activeClassName={s.active}>News</NavLink>
+          <NavLink to='/feed' className={s.link} activeClassName={s.active}>Feed</NavLink>
         </div>
         <div className={s.item}>
           <NavLink to='/music' className={s.link} activeClassName={s.active}>Music</NavLink>

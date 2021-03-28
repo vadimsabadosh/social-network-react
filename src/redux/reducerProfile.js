@@ -14,7 +14,6 @@ let initialState = {
 }
 
 const reducerProfile = (state = initialState, action) => {
-  debugger;
   switch (action.type) {
     case ADD_POST:
       let newPost = {
@@ -22,14 +21,16 @@ const reducerProfile = (state = initialState, action) => {
         message: state.newPostText,
         likesCount:0
       }
-      state.posts.push(newPost);
-      state.newPostText = '';
-      return state;
+      return {
+        ...state,
+        newPostText: '',
+        posts: [...state.posts, newPost]
+      };
     case UPDATE_POST_TEXT:
-      state.newPostText = action.newText;
-      return state;
-
-  
+      return {
+        ...state,
+        newPostText: action.newText
+      };
     default:
       return state;
   }
