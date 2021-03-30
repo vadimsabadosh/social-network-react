@@ -50,3 +50,10 @@
 .rightSide{
   text-align: right;
 }
+.selectedPage{
+  font-weight: 900;
+}
+.pageBtn span{
+  margin-left: 5px;
+  margin-right: 5px;
+}
