@@ -2,14 +2,9 @@ import { connect } from 'react-redux';
 import { updateTextMsgActionCreator, sendMsgActionCreator } from '../../redux/reducerMessages';
 import Messages from './Messages';
 import AuthRedirect from './../hoc/AuthRedirect';
+import { compose } from 'redux';
 
-const AuthRedirectComponent = AuthRedirect(Messages)
 
-const mapStateToProps = (state) => {
-  return {
-    messagesPage: state.messagesPage,
-  }
-}
 const mapDispatchToProps = (dispatch) => {
   return {
     updateMsgText: (text) => {
@@ -21,5 +16,12 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-const MessagesContainer = connect(mapStateToProps, mapDispatchToProps)(AuthRedirectComponent);
-export default MessagesContainer;
+const mapStateToProps = (state) => {
+  return {
+    messagesPage: state.messagesPage,
+  }
+}
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  AuthRedirect
+)(Messages);
