@@ -2,6 +2,7 @@ import React from 'react'
 import s from './Messages.module.css';
 import MessageUser from './MessageUser/MessageUser'
 import Message from './Message/Message';
+import { Redirect } from 'react-router';
 
 const Messages = (props) => {
   

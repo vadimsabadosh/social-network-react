@@ -30,7 +30,8 @@ const Users = (props) => {
             fullName={u.name} 
             status={u.status} 
             followThunk={props.followThunk}
-            unfollowThunk={props.unfollowThunk} 
+            unfollowThunk={props.unfollowThunk}
+            followingInProgress={props.followingInProgress}
             // country={u.location.country} 
             // city={u.location.city}
           />)
