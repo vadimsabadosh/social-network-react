@@ -1,11 +1,15 @@
 import React from 'react'
 import s from './ProfileInfo.module.css';
+import Preloader from '../../common/Preloader/Preloader'
 
-const ProfileInfo = () => {
+const ProfileInfo = (props) => {
+  if(!props.profile){
+    return <Preloader /> 
+  }
   return(
     <div>
       <div className={s.mainImg}>
-        <img  src='https://media.istockphoto.com/videos/be-confident-when-pursuing-success-video-id1130630420?s=640x640' />
+        <img  src={props.profile.photos.large} />
       </div>
       <div className={s.profileContent}>
         ava+ desc
