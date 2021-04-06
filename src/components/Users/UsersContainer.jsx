@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from "react-redux";
 import { 
   unfollow, 
-  setCurrentPage, 
   getUsersThunk,
   followThunk,
   unfollowThunk
@@ -11,6 +10,7 @@ import Users from './Users';
 import Preloader from '../common/Preloader/Preloader';
 import { compose } from 'redux';
 import AuthRedirect from './../hoc/AuthRedirect';
+import { getPageSize, getUsersReselect, getTotalCountUsers, getCurrentPage, getIsLoading, getFollowingInProgress } from '../../redux/users-selectors';
 
 class UsersContainer extends React.Component {
 
@@ -20,7 +20,6 @@ class UsersContainer extends React.Component {
 
   onPageChanged = (p) => {
     this.props.getUsersThunk(p, this.props.pageSize);
-    this.props.setCurrentPage(p)
   }
   
   render(){
@@ -47,19 +46,19 @@ class UsersContainer extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    users: state.usersPage.users,
-    pageSize: state.usersPage.pageSize,
-    totalCountUsers: state.usersPage.totalCountUsers,
-    currentPage: state.usersPage.currentPage,
-    isLoading: state.usersPage.isLoading,
-    followingInProgress: state.usersPage.followingInProgress
+    users: getUsersReselect(state),
+    pageSize:  getPageSize(state),
+    totalCountUsers: getTotalCountUsers(state),
+    currentPage: getCurrentPage(state),
+    isLoading: getIsLoading(state),
+    followingInProgress: getFollowingInProgress(state)
   }
 }
 export default compose(
   connect(mapStateToProps, {
-    unfollow, setCurrentPage,
-    getUsersThunk, followThunk, unfollowThunk
+    unfollow,  getUsersThunk, 
+    followThunk, unfollowThunk
   }),
-  AuthRedirect
+  //AuthRedirect
 )(UsersContainer);
 

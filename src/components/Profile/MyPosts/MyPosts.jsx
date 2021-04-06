@@ -14,7 +14,6 @@ const MyPosts = (props) => {
   let addNewPost = (values) => {
     props.addPost(values.postText);
   }
-
   return(
 
     <div className={s.postsWrapper}>

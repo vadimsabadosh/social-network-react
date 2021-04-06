@@ -95,13 +95,15 @@ export const toggleFollowingInProgress = (bool, userId) => ({ type: FOLLOWING_IN
 
 /*   ---------- THUNKS -------  */ 
 
-export const getUsersThunk = (currentPage, pageSize) => {
+export const getUsersThunk = (page, pageSize) => {
   return (dispatch) => {
     dispatch(toggleIsLoading(true));
-    userAPI.getUsers(currentPage, pageSize).then(response => {
+    dispatch(setCurrentPage(page))
+    userAPI.getUsers(page, pageSize).then(response => {
       dispatch(setUsers(response.items));
       dispatch(setTotalUsersCount(response.totalCount));
       dispatch(toggleIsLoading(false))
+
     })
   }
 } 

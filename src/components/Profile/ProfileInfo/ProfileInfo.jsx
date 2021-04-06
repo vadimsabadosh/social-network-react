@@ -1,7 +1,7 @@
 import React from 'react'
 import s from './ProfileInfo.module.css';
 import Preloader from '../../common/Preloader/Preloader'
-import ProfileStatus from './ProfileStatus'
+import ProfileStatus from './ProfileStatusHooks'
 import default_img from '../../../assets/images/default_user.png';
 
 const ProfileInfo = (props) => {
