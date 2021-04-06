@@ -6,7 +6,7 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import MessagesContainer from './components/Messages/MessagesContainer';
 import ProfileContainer from './components/Profile/ProfileContainer';
 import HeaderContainer from './components/Header/HeaderContainer';
-import LoginContainer from './components/Login/LoginContainer';
+import Login from './components/Login/Login';
 
 const App = () => {
   return (
@@ -33,7 +33,7 @@ const App = () => {
           <Route 
             exact 
             path='/login' 
-            render={() => <LoginContainer />}
+            render={() => <Login />}
           />
         </div>
       </div>

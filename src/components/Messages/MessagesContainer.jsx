@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { updateTextMsgActionCreator, sendMsgActionCreator } from '../../redux/reducerMessages';
+import { sendMsgActionCreator } from '../../redux/reducerMessages';
 import Messages from './Messages';
 import AuthRedirect from './../hoc/AuthRedirect';
 import { compose } from 'redux';
@@ -7,11 +7,8 @@ import { compose } from 'redux';
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    updateMsgText: (text) => {
-      dispatch(updateTextMsgActionCreator(text));
-    },
-    sendMsg: () => {
-      dispatch(sendMsgActionCreator());
+    sendMsg: (messageText) => {
+      dispatch(sendMsgActionCreator(messageText));
     }
   }
 }

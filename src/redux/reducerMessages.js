@@ -1,4 +1,3 @@
-const UPDATE_NEW_MSG_TEXT = 'UPDATE_NEW_MSG_TEXT';
 const SEND_MESSAGE = 'SEND_MESSAGE';
 
 let initialState = {
@@ -18,27 +17,19 @@ let initialState = {
     {id:5, message: 'are you?'},
     {id:6, message: 'another pzdc'},
   ],
-  newTextMsg: '',
 }
 
 
 const reducerMessages = (state = initialState, action) => {
   switch (action.type) {
-    case UPDATE_NEW_MSG_TEXT:{
-      return {
-        ...state,
-        newTextMsg: action.newText
-      }
-    }
     case SEND_MESSAGE:{
       let newMsg = {
         id: 10,
-        message: state.newTextMsg,
+        message: action.messageText,
       }
       return {
         ...state,
         messages: [...state.messages, newMsg],
-        newTextMsg: ''
       }
     }
     default: 
@@ -49,14 +40,9 @@ const reducerMessages = (state = initialState, action) => {
 export default reducerMessages;
 
 
-export const updateTextMsgActionCreator = (text) => {
-  return {
-    type: UPDATE_NEW_MSG_TEXT,
-    newText: text
-  }
-}
-export const sendMsgActionCreator = () => {
+export const sendMsgActionCreator = (messageText) => {
   return {
     type: SEND_MESSAGE,
+    messageText
   }
 }

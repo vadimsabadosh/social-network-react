@@ -1,0 +1,17 @@
+textarea {
+  outline: none;
+}
+.error{
+  color: red;
+  display: block;
+  margin-bottom: 20px;
+}
+.errorInput textarea,
+.errorInput input {
+  border: 1px solid red;
+}
+.groupError{
+  border: 1px solid red;
+  padding: 5px;
+  color: red;
+}
