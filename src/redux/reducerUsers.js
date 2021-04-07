@@ -96,39 +96,33 @@ export const toggleFollowingInProgress = (bool, userId) => ({ type: FOLLOWING_IN
 /*   ---------- THUNKS -------  */ 
 
 export const getUsersThunk = (page, pageSize) => {
-  return (dispatch) => {
+  return async(dispatch) => {
     dispatch(toggleIsLoading(true));
     dispatch(setCurrentPage(page))
-    userAPI.getUsers(page, pageSize).then(response => {
-      dispatch(setUsers(response.items));
-      dispatch(setTotalUsersCount(response.totalCount));
-      dispatch(toggleIsLoading(false))
+    let response = await userAPI.getUsers(page, pageSize);
+    dispatch(setUsers(response.items));
+    dispatch(setTotalUsersCount(response.totalCount));
+    dispatch(toggleIsLoading(false))
 
-    })
   }
 } 
 
+const followUnfollowFunc = async(dispatch, id, apiMethod, actionCreator ) => {
+  dispatch(toggleFollowingInProgress(true, id))
+  let response = await apiMethod(id);
+  if(response.resultCode === 0){
+    dispatch(actionCreator(id)) 
+  }
+  dispatch(toggleFollowingInProgress(false, id))
+}
+
 export const followThunk = (id) => {
-  return (dispatch) => {
-    dispatch(toggleFollowingInProgress(true, id))
-    userAPI.userFollow(id)
-    .then(response => {
-      if(response.resultCode === 0){
-        dispatch(follow(id)) 
-      }
-      dispatch(toggleFollowingInProgress(false, id))
-    })
+  return async(dispatch) => {
+    followUnfollowFunc(dispatch, id, userAPI.userFollow.bind(userAPI), follow)
   }
 } 
 export const unfollowThunk = (id) => {
-  return (dispatch) => {
-    dispatch(toggleFollowingInProgress(true, id));
-    userAPI.userUnfollow(id)
-    .then(response => {
-      if(response.resultCode === 0){
-        dispatch(unfollow(id)) 
-      }
-      dispatch(toggleFollowingInProgress(false, id))
-    })
+  return async(dispatch) => {
+    followUnfollowFunc(dispatch, id, userAPI.userUnfollow.bind(userAPI), unfollow)
   }
 } 
