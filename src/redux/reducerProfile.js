@@ -4,6 +4,7 @@ const ADD_POST = 'ADD-POST';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
 const SET_USER_STATUS = 'SET_USER_STATUS';
 const DELETE_POST = 'DELETE_POST';
+const SET_PHOTO = 'SET_PHOTO';
 
 let initialState = {
   posts: [
@@ -46,6 +47,11 @@ const reducerProfile = (state = initialState, action) => {
         ...state, posts: state.posts.filter(p => p.id !== action.postId)
       }
     }
+    case SET_PHOTO:{
+      return{
+        ...state, profile: {...state.profile, photos: action.photos}
+      }
+    }
     default:
       return state;
   }
@@ -74,6 +80,7 @@ export const setUserStatus = (status) => {
   }
 }
 export const deletePost = (postId) => ({type: DELETE_POST, postId})
+export const setPhoto = (photos) => ({type: SET_PHOTO, photos})
 
 
 /*********** THUNK */
@@ -95,6 +102,23 @@ export const updateUserStatus = (status) => {
     if(response.data.resultCode === 0){
 
       dispatch(setUserStatus(status))
+    }
+  }
+}
+export const savePhoto = (file) => {
+  return  async(dispatch) => {
+    const response = await profileAPI.savePhoto(file);
+    if(response.data.resultCode === 0){
+      dispatch(setPhoto(file))
+    }
+  }
+}
+export const saveProfile = (profile) => {
+  return  async(dispatch, getState) => {
+    const userId = getState().auth.userId
+    const response = await profileAPI.saveProfile(profile);
+    if(response.data.resultCode === 0){
+      dispatch(getUserProfile(userId))
     }
   }
 }

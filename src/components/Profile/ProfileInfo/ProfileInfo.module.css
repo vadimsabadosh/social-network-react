@@ -1,11 +1,13 @@
 .mainImg{
   width: 160px;
   margin-right: 25px;
+  height: 160px;
 }
 .mainImg img{
   max-width: 100%;
   border-radius: 50%;
   object-fit: cover;
+  height: 100%;
 }
 .profile_wrap {
   display: flex;

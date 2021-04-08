@@ -1,7 +1,8 @@
 import { stopSubmit } from "redux-form";
-import { authAPI } from "../api/api";
+import { authAPI, securityAPI } from "../api/api";
 
 const SET_USER_DATA = 'SET_USER_DATA';
+const GET_CAPTCHA_URL_SUCCESS = 'GET_CAPTCHA_URL';
 
 let initialState = {
   userId: null,
@@ -9,6 +10,7 @@ let initialState = {
   email: null,
   isLoading: false,
   isAuth: false,
+  captchaUrl: null
 }
 
 const reducerAuth = (state = initialState, action) => {
@@ -19,6 +21,12 @@ const reducerAuth = (state = initialState, action) => {
         ...action.data,
       }
     }
+    case GET_CAPTCHA_URL_SUCCESS:{
+      return {
+        ...state, 
+        captchaUrl: action.url,
+      }
+    }
 
     default:
       return state;
@@ -27,6 +35,7 @@ const reducerAuth = (state = initialState, action) => {
 export default reducerAuth;
 
 export const setAuthUserData = (userId, email, login, isAuth) => ({ type: SET_USER_DATA, data: {userId, email, login, isAuth} });
+export const getCaptchaUrlSuccess = (url) => ({ type: GET_CAPTCHA_URL_SUCCESS, url });
 
 export const getAuthUserData = () => {
   return async(dispatch) => {
@@ -38,13 +47,16 @@ export const getAuthUserData = () => {
     }
   }
 }
-export const login = (email, password, rememberMe) => {
+export const login = (email, password, rememberMe, captcha) => {
   return async(dispatch) => {
-    let response = await authAPI.login(email, password, rememberMe);
+    let response = await authAPI.login(email, password, rememberMe, captcha);
 
     if(response.data.resultCode === 0){
       dispatch(getAuthUserData());
-    } else {
+    }else {
+      if(response.data.resultCode === 10){
+        dispatch(getCaptcha())
+      }
       let action = stopSubmit('login', {_error: response.data.messages[0]});
       dispatch(action)
     }
@@ -59,3 +71,12 @@ export const logout = () => {
     }
   }
 }
+export const getCaptcha = () => {
+  return async(dispatch) => {
+    const response = await securityAPI.getCaptchaUrl();
+    let captchaUrl = response.data.url;
+
+      dispatch(getCaptchaUrlSuccess(captchaUrl));
+  }
+}
+

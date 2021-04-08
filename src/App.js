@@ -74,7 +74,7 @@ const AppContainer = connect(mapStateToProps, { setInitApp })(App);
 
 const MainApp = () => {
   return (
-    <BrowserRouter>
+    <BrowserRouter >
       <Provider store={store}>
         <AppContainer />
       </Provider>
@@ -82,3 +82,6 @@ const MainApp = () => {
   )
 }
 export default MainApp;
+
+
+// for gh pages HashRouter without basename instead BrowserRouter
